@@ -6,11 +6,11 @@ const BUTTON_TYPE_CLASSES = {
 }
 
 export default function Button(props) {
-	const { children, buttonType } = props
+	const { children, buttonType, ...otherProps } = props
 	return (
 		<button
 			className={`button-container ${BUTTON_TYPE_CLASSES[buttonType]}`}
-			{...props}
+			{...otherProps}
 		>
 			{children}
 		</button>

@@ -1,4 +1,3 @@
-import { async } from '@firebase/util'
 import { useState } from 'react'
 
 import FormInput from '../form-input/form-input.component'
@@ -43,15 +42,19 @@ export default function SignUpForm() {
 			const response = await createAuthUserWithEmailAndPassword(email, password)
 			const { user } = response
 
-			await createUserDocumentFromAuth(user, { displayName })
+			createUserDocumentFromAuth(user, { displayName })
+			// await createUserDocumentFromAuth(user, { displayName })
 			resetFormFields()
 		} catch (error) {
-			if (error.code === 'auth/email-already-in-use') {
-				alert('Email has already been in use')
-			} else if (error.code === 'auth/weak-password') {
-				alert('Password should be at least 6 characters')
-			} else {
-				console.log(error)
+			switch (error.code) {
+				case 'auth/email-already-in-use':
+					alert('Email has already been in use')
+					break
+				case 'auth/weak-password':
+					alert('Password should be at least 6 characters')
+					break
+				default:
+					console.log(error)
 			}
 		}
 	}
@@ -105,7 +108,10 @@ export default function SignUpForm() {
 					}}
 				/>
 
-				<Button type="submit">Sign Up</Button>
+				<div className="sign-up-buttons-container">
+					<Button type="submit">Sign Up</Button>
+					<div className="sign-up-button-space" />
+				</div>
 			</form>
 		</div>
 	)
