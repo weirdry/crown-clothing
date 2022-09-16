@@ -1,12 +1,13 @@
-.category-container {
-	min-width: 30%;
+.directory-item-container {
+	// min-width: 30%;
+	width: 100%;
 	height: 240px;
 	flex: 1 1 auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;
 	border: 1px solid black;
-	margin: 0 7.5px 15px;
+	// margin: 0 7.5px 15px;
 	overflow: hidden;
 
 	&:hover {
@@ -17,7 +18,7 @@
 			transition: transform 6s cubic-bezier(0.25, 0.45, 0.45, 0.95);
 		}
 
-		& .category-body-container {
+		& .directory-item-body-container {
 			opacity: 0.9;
 		}
 	}
@@ -27,7 +28,7 @@
 	}
 
 	&:first-child {
-		margin-right: 7.5px;
+		// margin-right: 7.5px;
 	}
 
 	&:last-child {
@@ -41,7 +42,7 @@
 		background-position: center;
 	}
 
-	.category-body-container {
+	.directory-item-body-container {
 		height: 90px;
 		padding: 0 25px;
 		display: flex;
