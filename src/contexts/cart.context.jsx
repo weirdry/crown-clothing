@@ -22,6 +22,30 @@ const sumCartItems = (cartItems) => {
 	return cartCount
 }
 
+const sumTotalPrice = (cartItems) => {
+	const totalPrice = cartItems.reduce(
+		(total, item) => total + item.quantity * item.price,
+		0,
+	)
+	return totalPrice
+}
+
+const removeItem = (cartItems, itemToRemove) => {
+	const newCartItems = cartItems.filter((item) => item.id !== itemToRemove.id)
+	return newCartItems
+}
+
+const adjustQuantity = (cartItems, itemToAdjust, increase) => {
+	const newCartItems = cartItems.map((item) =>
+		item.id === itemToAdjust.id
+			? increase
+				? { ...itemToAdjust, quantity: item.quantity + 1 }
+				: { ...itemToAdjust, quantity: item.quantity - 1 }
+			: item,
+	)
+	return newCartItems
+}
+
 export const CartContext = createContext({
 	isCartOpen: false,
 	setIsCartOpen: () => {},
@@ -29,19 +53,40 @@ export const CartContext = createContext({
 	addItemToCart: () => {},
 	sumCartItems: () => {},
 	cartCount: 0,
+	totalPrice: 0,
+	removeItemFromCart: () => {},
+	increaseItemQuantity: () => {},
+	decreaseItemQuantity: () => {},
 })
 
 export const CartProvider = ({ children }) => {
 	const [isCartOpen, setIsCartOpen] = useState(false)
 	const [cartItems, setCartItems] = useState([])
 	const [cartCount, setCartCount] = useState(0)
+	const [totalPrice, setTotalPrice] = useState(0)
 
 	useEffect(() => {
 		setCartCount(sumCartItems(cartItems))
 	}, [cartItems])
 
+	useEffect(() => {
+		setTotalPrice(sumTotalPrice(cartItems))
+	}, [cartItems])
+
 	const addItemToCart = (productToAdd) => {
 		setCartItems(addCartItem(cartItems, productToAdd))
+	}
+
+	const removeItemFromCart = (productToRemove) => {
+		setCartItems(removeItem(cartItems, productToRemove))
+	}
+
+	const increaseItemQuantity = (productToAdjust) => {
+		setCartItems(adjustQuantity(cartItems, productToAdjust, true))
+	}
+
+	const decreaseItemQuantity = (productToAdjust) => {
+		setCartItems(adjustQuantity(cartItems, productToAdjust, false))
 	}
 
 	const value = {
@@ -51,6 +96,10 @@ export const CartProvider = ({ children }) => {
 		addItemToCart,
 		sumCartItems,
 		cartCount,
+		totalPrice,
+		removeItemFromCart,
+		increaseItemQuantity,
+		decreaseItemQuantity,
 	}
 
 	return <CartContext.Provider value={value}>{children}</CartContext.Provider>
