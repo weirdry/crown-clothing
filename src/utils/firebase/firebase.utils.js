@@ -18,7 +18,6 @@ import {
 	writeBatch,
 	query,
 	getDocs,
-	QuerySnapshot,
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -30,6 +29,7 @@ const firebaseConfig = {
 	appId: '1:859239697648:web:fd1a109b11ca15abdb0635',
 }
 
+// eslint-disable-next-line
 const firebaseApp = initializeApp(firebaseConfig)
 
 const googleProvider = new GoogleAuthProvider()

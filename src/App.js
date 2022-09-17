@@ -2,8 +2,6 @@ import { useEffect } from 'react'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
-import { CartProvider } from './contexts/cart.context'
-
 import {
 	createUserDocumentFromAuth,
 	onAuthStateChangedListener,
@@ -34,16 +32,14 @@ export default function App() {
 
 	return (
 		<Router>
-			<CartProvider>
-				<Routes>
-					<Route path="/" element={<Navigation />}>
-						<Route index element={<Home />} />
-						<Route path="/shop/*" element={<Shop />} />
-						<Route path="/checkout" element={<Checkout />} />
-						<Route path="/auth" element={<Authentification />} />
-					</Route>
-				</Routes>
-			</CartProvider>
+			<Routes>
+				<Route path="/" element={<Navigation />}>
+					<Route index element={<Home />} />
+					<Route path="/shop/*" element={<Shop />} />
+					<Route path="/checkout" element={<Checkout />} />
+					<Route path="/auth" element={<Authentification />} />
+				</Route>
+			</Routes>
 		</Router>
 	)
 }
