@@ -2,7 +2,11 @@ import { useNavigate } from 'react-router-dom'
 
 import ProductCard from '../product-card/product-card.component'
 
-import './category-preview.styles.scss'
+import {
+	CategoryPreviewContainer,
+	Title,
+	Preview,
+} from './category-preview.styles'
 
 export default function CategoryPreview(props) {
 	const { title, products } = props
@@ -10,17 +14,17 @@ export default function CategoryPreview(props) {
 	const navigate = useNavigate()
 
 	return (
-		<div className="category-preview-container">
+		<CategoryPreviewContainer>
 			<h2 onClick={() => navigate(`${title.toLowerCase()}`)}>
-				<span className="title">{title.toUpperCase()}</span>
+				<Title>{title.toUpperCase()}</Title>
 			</h2>
-			<div className="preview">
+			<Preview>
 				{products
 					.filter((_, index) => index < 4)
 					.map((product) => (
 						<ProductCard key={product.id} product={product} />
 					))}
-			</div>
-		</div>
+			</Preview>
+		</CategoryPreviewContainer>
 	)
 }

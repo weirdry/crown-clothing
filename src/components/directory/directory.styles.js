@@ -1,4 +1,6 @@
-.categories-container {
+import styled from '@emotion/styled'
+
+export const CategoriesContainer = styled.div`
 	width: 100%;
 	display: flex;
 	flex-wrap: wrap;
@@ -9,4 +11,4 @@
 		flex-basis: 360px;
 		flex-grow: 1;
 	}
-}
+`
