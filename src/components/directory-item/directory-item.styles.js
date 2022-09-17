@@ -37,7 +37,7 @@ export const DirectoryItemContainer = styled.div`
 	// min-width: 30%;
 	width: 100%;
 	height: 240px;
-	flex: 1 1 auto;
+	//flex: 1 1 auto;
 	display: flex;
 	align-items: center;
 	justify-content: center;
