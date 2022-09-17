@@ -36,11 +36,11 @@ export const Quantity = styled.span`
 	button {
 		all: unset;
 		cursor: pointer;
-	}
 
-	:disabled {
-		opacity: 0.2;
-		cursor: default;
+		:disabled {
+			opacity: 0.2;
+			cursor: default;
+		}
 	}
 `
 
