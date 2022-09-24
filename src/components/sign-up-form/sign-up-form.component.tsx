@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, FormEvent, ChangeEvent } from 'react'
+import { AuthError, AuthErrorCodes } from 'firebase/auth'
 import { useDispatch } from 'react-redux'
 
 import FormInput from '../form-input/form-input.component'
@@ -23,14 +24,14 @@ export default function SignUpForm() {
 
 	const resetFormFields = () => setFormFields(defaultFormFields)
 
-	const handleChange = (e) => {
+	const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setFormFields((prevState) => ({
 			...prevState,
 			[e.target.name]: e.target.value,
 		}))
 	}
 
-	const handleSubmit = async (e) => {
+	const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
 		e.preventDefault()
 
 		if (password !== confirmPassword) {
@@ -42,11 +43,11 @@ export default function SignUpForm() {
 			dispatch(signUpStart(email, password, displayName))
 			resetFormFields()
 		} catch (error) {
-			switch (error.code) {
-				case 'auth/email-already-in-use':
+			switch ((error as AuthError).code) {
+				case AuthErrorCodes.EMAIL_EXISTS:
 					alert('Email has already been in use')
 					break
-				case 'auth/weak-password':
+				case AuthErrorCodes.WEAK_PASSWORD:
 					alert('Password should be at least 6 characters')
 					break
 				default:

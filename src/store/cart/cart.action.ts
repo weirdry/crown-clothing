@@ -10,7 +10,7 @@ const addCartItem = (
 	cartItems: CartItem[],
 	productToAdd: CategoryItem,
 ): CartItem[] => {
-	// Check wehter item has already added to the cart
+	// Check wether item has already added to the cart
 	const existingCartItem = cartItems?.find(
 		(item) => item.id === productToAdd.id,
 	)
