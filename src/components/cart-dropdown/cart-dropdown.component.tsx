@@ -19,7 +19,7 @@ export default function CartDropdown() {
 	const cartItems = useSelector(selectCartItems)
 	const navigate = useNavigate()
 
-	const goToPage = (path) => {
+	const goToPage = (path: string) => {
 		navigate(`/${path}`)
 		dispatch(setIsCartOpen(false))
 	}

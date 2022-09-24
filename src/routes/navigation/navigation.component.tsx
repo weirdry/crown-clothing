@@ -18,7 +18,7 @@ import {
 	LogoLink,
 	NavLinks,
 	NavLink,
-} from './navigation.styles.js'
+} from './navigation.styles'
 
 export default function Navigation() {
 	const currentUser = useSelector(selectCurrentUser)
@@ -38,7 +38,7 @@ export default function Navigation() {
 				<NavLinks>
 					<NavLink to="/shop">SHOP</NavLink>
 					{currentUser ? (
-						<NavLink as="span" to="/" onClick={signOutUser}>
+						<NavLink to="/" onClick={signOutUser}>
 							SIGN OUT
 						</NavLink>
 					) : (

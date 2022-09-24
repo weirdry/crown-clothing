@@ -1,11 +1,16 @@
 import styled from '@emotion/styled/macro'
 
+type BackgroundImageProps = {
+	imageUrl: string
+}
+
 export const BackgroundImage = styled.div`
 	width: 100%;
 	height: 100%;
 	background-size: cover;
 	background-position: center;
-	background-image: ${(props) => `url(${props.imageUrl})`};
+	background-image: ${(props: BackgroundImageProps) =>
+		`url(${props.imageUrl})`};
 `
 
 export const Body = styled.div`

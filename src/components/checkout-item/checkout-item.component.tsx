@@ -1,4 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux'
+import { CartItem } from '../../store/cart/cart.types'
 
 import {
 	removeItemFromCart,
@@ -18,7 +19,11 @@ import {
 	RemoveButton,
 } from './checkout-item.styles'
 
-export default function CheckoutItem({ item }) {
+type CheckoutItemProps = {
+	item: CartItem
+}
+
+export default function CheckoutItem({ item }: CheckoutItemProps) {
 	const { name, imageUrl, price, quantity } = item
 
 	const dispatch = useDispatch()

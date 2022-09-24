@@ -1,6 +1,12 @@
 import { CartItemContainer, ItemDetails } from './cart-item.styles'
 
-export default function CartItem({ item }) {
+import { CartItem as CartItemTypes } from '../../store/cart/cart.types'
+
+type CartItemProps = {
+	item: CartItemTypes
+}
+
+export default function CartItem({ item }: CartItemProps) {
 	const { name, imageUrl, price, quantity } = item
 
 	return (

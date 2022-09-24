@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 
+import { CategoryItem } from '../../store/categories/categories.types'
+
 import ProductCard from '../product-card/product-card.component'
 
 import {
@@ -8,7 +10,12 @@ import {
 	Preview,
 } from './category-preview.styles'
 
-export default function CategoryPreview(props) {
+type CategoryPreviewProps = {
+	title: string
+	products: CategoryItem[]
+}
+
+export default function CategoryPreview(props: CategoryPreviewProps) {
 	const { title, products } = props
 
 	const navigate = useNavigate()
