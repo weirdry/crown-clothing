@@ -11,7 +11,9 @@ const addCartItem = (
 	productToAdd: CategoryItem,
 ): CartItem[] => {
 	// Check wehter item has already added to the cart
-	const existingCartItem = cartItems.find((item) => item.id === productToAdd.id)
+	const existingCartItem = cartItems?.find(
+		(item) => item.id === productToAdd.id,
+	)
 	// If so, adjust a quantity of the item
 	if (existingCartItem) {
 		return cartItems.map((item) =>
@@ -21,14 +23,18 @@ const addCartItem = (
 		)
 	}
 	// If not, just add to the cart with quantity one
-	return [...cartItems, { ...productToAdd, quantity: 1 }]
+	if (cartItems?.length) {
+		return [...cartItems, { ...productToAdd, quantity: 1 }]
+	} else {
+		return [{ ...productToAdd, quantity: 1 }]
+	}
 }
 
 const removeItem = (
 	cartItems: CartItem[],
 	itemToRemove: CartItem,
 ): CartItem[] => {
-	const newCartItems = cartItems.filter((item) => item.id !== itemToRemove.id)
+	const newCartItems = cartItems?.filter((item) => item.id !== itemToRemove.id)
 	return newCartItems
 }
 
@@ -37,7 +43,7 @@ const adjustQuantity = (
 	itemToAdjust: CartItem,
 	increase: boolean,
 ): CartItem[] => {
-	const newCartItems = cartItems.map((item) =>
+	const newCartItems = cartItems?.map((item) =>
 		item.id === itemToAdjust.id
 			? increase
 				? { ...itemToAdjust, quantity: item.quantity + 1 }
@@ -68,7 +74,7 @@ export const setCartItems = withMatcher(
 )
 
 export const addItemToCart = withMatcher(
-	(cartItems: CartItem[], productToAdd: CartItem): SetCartItems => {
+	(cartItems: CartItem[], productToAdd: CategoryItem): SetCartItems => {
 		const newCartItems = addCartItem(cartItems, productToAdd)
 		return setCartItems(newCartItems)
 	},
